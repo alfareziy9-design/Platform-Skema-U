@@ -1,3 +1,6 @@
+package com.upn.skema_u
+
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -41,6 +44,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -314,7 +318,7 @@ private fun LoginCard(
                     containerColor = Color.White,
                     contentColor = LoginDarkGreen,
                 ),
-                border = androidx.compose.foundation.BorderStroke(1.4.dp, LoginDarkGreen),
+                border = BorderStroke(1.4.dp, LoginDarkGreen),
             ) {
                 Text(
                     text = "Daftar Akun",
@@ -512,7 +516,7 @@ private fun AudienceText() {
     }
 }
 
-private fun androidx.compose.ui.graphics.drawscope.DrawScope.drawGraduateCap(
+private fun DrawScope.drawGraduateCap(
     center: Offset,
     width: Float,
     color: Color,
@@ -556,7 +560,7 @@ private fun androidx.compose.ui.graphics.drawscope.DrawScope.drawGraduateCap(
     )
 }
 
-private fun androidx.compose.ui.graphics.drawscope.DrawScope.drawShield(color: Color) {
+private fun DrawScope.drawShield(color: Color) {
     val shield = Path().apply {
         moveTo(size.width * 0.50f, size.height * 0.04f)
         lineTo(size.width * 0.90f, size.height * 0.22f)

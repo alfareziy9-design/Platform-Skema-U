@@ -65,7 +65,7 @@ private val ProjectGrayIcon = Color(0xFF9CA3AF)
 @Composable
 fun SkemaUProjectScreen(
     modifier: Modifier = Modifier,
-    @DrawableRes contentImageRes: Int = R.drawable.konten2
+    @DrawableRes contentImageRes: Int = R.drawable.konten3
 ) {
     Box(
         modifier = modifier
@@ -547,7 +547,14 @@ private fun ProjectTopAppBar() {
                     .background(Brush.linearGradient(listOf(Color(0xFFFF637D), Color(0xFFBDF0CF)))),
                 contentAlignment = Alignment.Center
             ) {
-                Text("N", color = ProjectSurface, fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                Image(
+                    painter = painterResource(id = R.drawable.farah),
+                    contentDescription = "Foto Farah",
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clip(CircleShape),
+                    contentScale = ContentScale.Crop
+                )
             }
             Text(
                 text = "Skema-U",
@@ -617,47 +624,166 @@ private fun VectorIcon(modifier: Modifier, draw: DrawScope.() -> Unit) {
     Canvas(modifier = modifier) { draw() }
 }
 
-@Composable private fun MegaphoneIcon(color: Color, modifier: Modifier) = VectorIcon(modifier) {
-    val stroke = Stroke(1.6.dp.toPx(), cap = StrokeCap.Round, join = StrokeJoin.Round)
-    drawLine(color, Offset(size.width * 0.08f, size.height * 0.48f), Offset(size.width * 0.38f, size.height * 0.48f), style = stroke)
-    drawLine(color, Offset(size.width * 0.38f, size.height * 0.25f), Offset(size.width * 0.82f, size.height * 0.08f), style = stroke)
-    drawLine(color, Offset(size.width * 0.38f, size.height * 0.70f), Offset(size.width * 0.82f, size.height * 0.88f), style = stroke)
-    drawLine(color, Offset(size.width * 0.38f, size.height * 0.25f), Offset(size.width * 0.38f, size.height * 0.70f), style = stroke)
-    drawLine(color, Offset(size.width * 0.22f, size.height * 0.52f), Offset(size.width * 0.30f, size.height * 0.88f), style = stroke)
+@Composable
+private fun MegaphoneIcon(color: Color, modifier: Modifier) = VectorIcon(modifier) {
+    val strokeWidth = 1.6.dp.toPx()
+
+    drawLine(
+        color = color,
+        start = Offset(size.width * 0.08f, size.height * 0.48f),
+        end = Offset(size.width * 0.38f, size.height * 0.48f),
+        strokeWidth = strokeWidth,
+        cap = StrokeCap.Round
+    )
+
+    drawLine(
+        color = color,
+        start = Offset(size.width * 0.38f, size.height * 0.25f),
+        end = Offset(size.width * 0.82f, size.height * 0.08f),
+        strokeWidth = strokeWidth,
+        cap = StrokeCap.Round
+    )
+
+    drawLine(
+        color = color,
+        start = Offset(size.width * 0.38f, size.height * 0.70f),
+        end = Offset(size.width * 0.82f, size.height * 0.88f),
+        strokeWidth = strokeWidth,
+        cap = StrokeCap.Round
+    )
+
+    drawLine(
+        color = color,
+        start = Offset(size.width * 0.38f, size.height * 0.25f),
+        end = Offset(size.width * 0.38f, size.height * 0.70f),
+        strokeWidth = strokeWidth,
+        cap = StrokeCap.Round
+    )
+
+    drawLine(
+        color = color,
+        start = Offset(size.width * 0.22f, size.height * 0.52f),
+        end = Offset(size.width * 0.30f, size.height * 0.88f),
+        strokeWidth = strokeWidth,
+        cap = StrokeCap.Round
+    )
 }
+
 
 @Composable private fun CheckIcon(color: Color, modifier: Modifier) = VectorIcon(modifier) {
     drawLine(color, Offset(size.width * 0.12f, size.height * 0.54f), Offset(size.width * 0.42f, size.height * 0.82f), 2.dp.toPx(), StrokeCap.Round)
     drawLine(color, Offset(size.width * 0.42f, size.height * 0.82f), Offset(size.width * 0.90f, size.height * 0.18f), 2.dp.toPx(), StrokeCap.Round)
 }
 
-@Composable private fun CycleIcon(color: Color, modifier: Modifier) = VectorIcon(modifier) {
-    val stroke = Stroke(1.6.dp.toPx(), cap = StrokeCap.Round, join = StrokeJoin.Round)
-    drawArc(color, startAngle = 35f, sweepAngle = 250f, useCenter = false, topLeft = Offset(size.width * 0.16f, size.height * 0.16f), size = Size(size.width * 0.68f, size.height * 0.68f), style = stroke)
-    drawLine(color, Offset(size.width * 0.64f, size.height * 0.13f), Offset(size.width * 0.83f, size.height * 0.18f), style = stroke)
-    drawLine(color, Offset(size.width * 0.78f, size.height * 0.34f), Offset(size.width * 0.83f, size.height * 0.18f), style = stroke)
-    drawArc(color, startAngle = 215f, sweepAngle = 130f, useCenter = false, topLeft = Offset(size.width * 0.18f, size.height * 0.18f), size = Size(size.width * 0.64f, size.height * 0.64f), style = stroke)
+@Composable
+private fun CycleIcon(color: Color, modifier: Modifier) = VectorIcon(modifier) {
+    val strokeWidth = 1.6.dp.toPx()
+    val stroke = Stroke(width = strokeWidth, cap = StrokeCap.Round, join = StrokeJoin.Round)
+
+    drawArc(
+        color = color,
+        startAngle = 35f,
+        sweepAngle = 250f,
+        useCenter = false,
+        topLeft = Offset(size.width * 0.16f, size.height * 0.16f),
+        size = Size(size.width * 0.68f, size.height * 0.68f),
+        style = stroke
+    )
+
+    drawLine(
+        color = color,
+        start = Offset(size.width * 0.64f, size.height * 0.13f),
+        end = Offset(size.width * 0.83f, size.height * 0.18f),
+        strokeWidth = strokeWidth,
+        cap = StrokeCap.Round
+    )
+
+    drawLine(
+        color = color,
+        start = Offset(size.width * 0.78f, size.height * 0.34f),
+        end = Offset(size.width * 0.83f, size.height * 0.18f),
+        strokeWidth = strokeWidth,
+        cap = StrokeCap.Round
+    )
+
+    drawArc(
+        color = color,
+        startAngle = 215f,
+        sweepAngle = 130f,
+        useCenter = false,
+        topLeft = Offset(size.width * 0.18f, size.height * 0.18f),
+        size = Size(size.width * 0.64f, size.height * 0.64f),
+        style = stroke
+    )
 }
 
-@Composable private fun GearIcon(color: Color, modifier: Modifier) = VectorIcon(modifier) {
-    val stroke = Stroke(1.3.dp.toPx(), cap = StrokeCap.Round, join = StrokeJoin.Round)
-    drawCircle(color, radius = size.minDimension * 0.23f, center = Offset(size.width / 2f, size.height / 2f), style = stroke)
+
+@Composable
+private fun GearIcon(color: Color, modifier: Modifier) = VectorIcon(modifier) {
+    val strokeWidth = 1.3.dp.toPx()
+    val stroke = Stroke(width = strokeWidth, cap = StrokeCap.Round, join = StrokeJoin.Round)
+
+    drawCircle(
+        color = color,
+        radius = size.minDimension * 0.23f,
+        center = Offset(size.width / 2f, size.height / 2f),
+        style = stroke
+    )
+
     repeat(8) { i ->
         val angle = Math.toRadians((i * 45).toDouble())
         val sx = size.width / 2f + cos(angle).toFloat() * size.minDimension * 0.32f
         val sy = size.height / 2f + sin(angle).toFloat() * size.minDimension * 0.32f
         val ex = size.width / 2f + cos(angle).toFloat() * size.minDimension * 0.42f
         val ey = size.height / 2f + sin(angle).toFloat() * size.minDimension * 0.42f
-        drawLine(color, Offset(sx, sy), Offset(ex, ey), style = stroke)
+
+        drawLine(
+            color = color,
+            start = Offset(sx, sy),
+            end = Offset(ex, ey),
+            strokeWidth = strokeWidth,
+            cap = StrokeCap.Round
+        )
     }
 }
 
-@Composable private fun VectorAssetIcon(color: Color, modifier: Modifier) = VectorIcon(modifier) {
-    val stroke = Stroke(1.8.dp.toPx(), cap = StrokeCap.Round, join = StrokeJoin.Round)
-    drawLine(color, Offset(size.width * 0.25f, size.height * 0.72f), Offset(size.width * 0.66f, size.height * 0.30f), style = stroke)
-    drawCircle(color, 2.dp.toPx(), Offset(size.width * 0.28f, size.height * 0.72f), style = stroke)
-    drawCircle(color, 2.dp.toPx(), Offset(size.width * 0.66f, size.height * 0.30f), style = stroke)
-    drawLine(color, Offset(size.width * 0.42f, size.height * 0.76f), Offset(size.width * 0.76f, size.height * 0.42f), style = stroke)
+
+@Composable
+private fun VectorAssetIcon(color: Color, modifier: Modifier) = VectorIcon(modifier) {
+    val strokeWidth = 1.8.dp.toPx()
+    val stroke = Stroke(width = strokeWidth, cap = StrokeCap.Round, join = StrokeJoin.Round)
+
+    val pencil = Path().apply {
+        moveTo(size.width * 0.20f, size.height * 0.80f)
+        lineTo(size.width * 0.28f, size.height * 0.58f)
+        lineTo(size.width * 0.68f, size.height * 0.18f)
+        lineTo(size.width * 0.82f, size.height * 0.32f)
+        lineTo(size.width * 0.42f, size.height * 0.72f)
+        lineTo(size.width * 0.20f, size.height * 0.80f)
+        close()
+    }
+
+    drawPath(
+        path = pencil,
+        color = color,
+        style = stroke
+    )
+
+    drawLine(
+        color = color,
+        start = Offset(size.width * 0.62f, size.height * 0.24f),
+        end = Offset(size.width * 0.76f, size.height * 0.38f),
+        strokeWidth = strokeWidth,
+        cap = StrokeCap.Round
+    )
+
+    drawLine(
+        color = color,
+        start = Offset(size.width * 0.28f, size.height * 0.58f),
+        end = Offset(size.width * 0.42f, size.height * 0.72f),
+        strokeWidth = strokeWidth,
+        cap = StrokeCap.Round
+    )
 }
 
 @Composable private fun BookIcon(color: Color, modifier: Modifier) = VectorIcon(modifier) {
@@ -678,12 +804,67 @@ private fun VectorIcon(modifier: Modifier, draw: DrawScope.() -> Unit) {
     }, color, style = stroke)
 }
 
-@Composable private fun BellIcon(color: Color, modifier: Modifier) = VectorIcon(modifier) {
-    val stroke = Stroke(1.6.dp.toPx(), cap = StrokeCap.Round, join = StrokeJoin.Round)
-    drawArc(color, startAngle = 200f, sweepAngle = 140f, useCenter = false, topLeft = Offset(size.width * 0.16f, size.height * 0.18f), size = Size(size.width * 0.68f, size.height * 0.58f), style = stroke)
-    drawLine(color, Offset(size.width * 0.16f, size.height * 0.68f), Offset(size.width * 0.84f, size.height * 0.68f), style = stroke)
-    drawCircle(color, 1.4.dp.toPx(), Offset(size.width / 2f, size.height * 0.82f))
+@Composable
+private fun BellIcon(color: Color, modifier: Modifier) = VectorIcon(modifier) {
+    val strokeWidth = 1.6.dp.toPx()
+    val stroke = Stroke(width = strokeWidth, cap = StrokeCap.Round, join = StrokeJoin.Round)
+
+    val bellPath = Path().apply {
+        moveTo(size.width * 0.50f, size.height * 0.18f)
+
+        cubicTo(
+            size.width * 0.34f, size.height * 0.18f,
+            size.width * 0.24f, size.height * 0.32f,
+            size.width * 0.24f, size.height * 0.48f
+        )
+
+        lineTo(size.width * 0.24f, size.height * 0.62f)
+
+        cubicTo(
+            size.width * 0.24f, size.height * 0.70f,
+            size.width * 0.18f, size.height * 0.72f,
+            size.width * 0.18f, size.height * 0.76f
+        )
+
+        lineTo(size.width * 0.82f, size.height * 0.76f)
+
+        cubicTo(
+            size.width * 0.82f, size.height * 0.72f,
+            size.width * 0.76f, size.height * 0.70f,
+            size.width * 0.76f, size.height * 0.62f
+        )
+
+        lineTo(size.width * 0.76f, size.height * 0.48f)
+
+        cubicTo(
+            size.width * 0.76f, size.height * 0.32f,
+            size.width * 0.66f, size.height * 0.18f,
+            size.width * 0.50f, size.height * 0.18f
+        )
+    }
+
+    drawPath(
+        path = bellPath,
+        color = color,
+        style = stroke
+    )
+
+    drawLine(
+        color = color,
+        start = Offset(size.width * 0.42f, size.height * 0.84f),
+        end = Offset(size.width * 0.58f, size.height * 0.84f),
+        strokeWidth = strokeWidth,
+        cap = StrokeCap.Round
+    )
+
+    drawCircle(
+        color = color,
+        radius = 1.5.dp.toPx(),
+        center = Offset(size.width / 2f, size.height * 0.84f)
+    )
 }
+
+
 
 @Composable private fun HomeIcon(color: Color, modifier: Modifier) = VectorIcon(modifier) {
     val p = Path().apply {

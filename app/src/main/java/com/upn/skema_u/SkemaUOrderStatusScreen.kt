@@ -1,3 +1,5 @@
+package com.upn.skema_u
+
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
@@ -7,7 +9,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -26,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
@@ -43,6 +45,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -68,7 +71,7 @@ fun SkemaUOrderStatusScreen(
     modifier: Modifier = Modifier,
     @DrawableRes userProfileImageRes: Int = R.drawable.profil_client,
     @DrawableRes bellIconRes: Int = R.drawable.icon_lonceng,
-    @DrawableRes projectOneImageRes: Int = R.drawable.profil_student_1,
+    @DrawableRes projectOneImageRes: Int = R.drawable.farah,
     @DrawableRes projectTwoImageRes: Int = R.drawable.profil_student_2,
     @DrawableRes projectThreeImageRes: Int = R.drawable.profil_student_4
 ) {
@@ -401,12 +404,12 @@ private fun FinishedReviewCard(@DrawableRes imageRes: Int) {
 }
 
 @Composable
-private fun ProjectThumb(@DrawableRes imageRes: Int, size: androidx.compose.ui.unit.Dp) {
+private fun ProjectThumb(@DrawableRes imageRes: Int, size: Dp) {
     ProjectThumb(imageRes = imageRes, width = size, height = size)
 }
 
 @Composable
-private fun ProjectThumb(@DrawableRes imageRes: Int, width: androidx.compose.ui.unit.Dp, height: androidx.compose.ui.unit.Dp) {
+private fun ProjectThumb(@DrawableRes imageRes: Int, width: Dp, height: Dp) {
     Image(
         painter = painterResource(imageRes),
         contentDescription = null,
@@ -444,7 +447,7 @@ private fun PrimaryActionButton(
     text: String,
     color: Color,
     modifier: Modifier = Modifier,
-    width: androidx.compose.ui.unit.Dp? = null
+    width: Dp? = null
 ) {
     Box(
         modifier = modifier
@@ -535,11 +538,28 @@ private fun VectorIcon(modifier: Modifier, draw: DrawScope.() -> Unit) {
     Canvas(modifier = modifier) { draw() }
 }
 
-@Composable private fun CalendarIcon(color: Color, modifier: Modifier) = VectorIcon(modifier) {
-    val stroke = Stroke(1.4.dp.toPx(), cap = StrokeCap.Round, join = StrokeJoin.Round)
-    drawRoundRect(color, Offset(size.width * 0.14f, size.height * 0.20f), Size(size.width * 0.72f, size.height * 0.66f), androidx.compose.ui.geometry.CornerRadius(1.dp.toPx()), style = stroke)
-    drawLine(color, Offset(size.width * 0.14f, size.height * 0.40f), Offset(size.width * 0.86f, size.height * 0.40f), style = stroke)
+@Composable
+private fun CalendarIcon(color: Color, modifier: Modifier) = VectorIcon(modifier) {
+    val strokeWidth = 1.4.dp.toPx()
+    val stroke = Stroke(width = strokeWidth, cap = StrokeCap.Round, join = StrokeJoin.Round)
+
+    drawRoundRect(
+        color = color,
+        topLeft = Offset(size.width * 0.14f, size.height * 0.20f),
+        size = Size(size.width * 0.72f, size.height * 0.66f),
+        cornerRadius = CornerRadius(1.dp.toPx()),
+        style = stroke
+    )
+
+    drawLine(
+        color = color,
+        start = Offset(size.width * 0.14f, size.height * 0.40f),
+        end = Offset(size.width * 0.86f, size.height * 0.40f),
+        strokeWidth = strokeWidth,
+        cap = StrokeCap.Round
+    )
 }
+
 
 @Composable private fun CheckCircleIcon(color: Color, modifier: Modifier) = VectorIcon(modifier) {
     drawCircle(color)
@@ -568,15 +588,40 @@ private fun VectorIcon(modifier: Modifier, draw: DrawScope.() -> Unit) {
 }
 
 @Composable private fun MessageIcon(color: Color, modifier: Modifier) = VectorIcon(modifier) {
-    drawRoundRect(color, Offset(3.dp.toPx(), 4.dp.toPx()), Size(14.dp.toPx(), 11.dp.toPx()), androidx.compose.ui.geometry.CornerRadius(2.dp.toPx()), style = Stroke(1.5.dp.toPx()))
+    drawRoundRect(color, Offset(3.dp.toPx(), 4.dp.toPx()), Size(14.dp.toPx(), 11.dp.toPx()),
+        CornerRadius(2.dp.toPx()), style = Stroke(1.5.dp.toPx()))
 }
 
-@Composable private fun ClipboardIcon(color: Color, modifier: Modifier) = VectorIcon(modifier) {
-    val stroke = Stroke(1.5.dp.toPx(), cap = StrokeCap.Round, join = StrokeJoin.Round)
-    drawRoundRect(color, Offset(4.dp.toPx(), 4.dp.toPx()), Size(12.dp.toPx(), 14.dp.toPx()), androidx.compose.ui.geometry.CornerRadius(1.5.dp.toPx()), style = stroke)
-    drawLine(color, Offset(7.dp.toPx(), 8.dp.toPx()), Offset(13.dp.toPx(), 8.dp.toPx()), style = stroke)
-    drawLine(color, Offset(7.dp.toPx(), 12.dp.toPx()), Offset(13.dp.toPx(), 12.dp.toPx()), style = stroke)
+@Composable
+private fun ClipboardIcon(color: Color, modifier: Modifier) = VectorIcon(modifier) {
+    val strokeWidth = 1.5.dp.toPx()
+    val stroke = Stroke(width = strokeWidth, cap = StrokeCap.Round, join = StrokeJoin.Round)
+
+    drawRoundRect(
+        color = color,
+        topLeft = Offset(4.dp.toPx(), 4.dp.toPx()),
+        size = Size(12.dp.toPx(), 14.dp.toPx()),
+        cornerRadius = CornerRadius(1.5.dp.toPx()),
+        style = stroke
+    )
+
+    drawLine(
+        color = color,
+        start = Offset(7.dp.toPx(), 8.dp.toPx()),
+        end = Offset(13.dp.toPx(), 8.dp.toPx()),
+        strokeWidth = strokeWidth,
+        cap = StrokeCap.Round
+    )
+
+    drawLine(
+        color = color,
+        start = Offset(7.dp.toPx(), 12.dp.toPx()),
+        end = Offset(13.dp.toPx(), 12.dp.toPx()),
+        strokeWidth = strokeWidth,
+        cap = StrokeCap.Round
+    )
 }
+
 
 @Composable private fun UserIcon(color: Color, modifier: Modifier) = VectorIcon(modifier) {
     drawCircle(color, radius = 3.dp.toPx(), center = Offset(size.width / 2f, size.height * 0.34f), style = Stroke(1.5.dp.toPx()))

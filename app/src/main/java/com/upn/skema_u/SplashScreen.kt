@@ -185,7 +185,7 @@ private fun LogoCard(
                 contentScale = ContentScale.Inside,
             )
 
-            Spacer(modifier = Modifier.height(6.dp))
+            Spacer(modifier = Modifier.height(2.dp))
 
         }
     }

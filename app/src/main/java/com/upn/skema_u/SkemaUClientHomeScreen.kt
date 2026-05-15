@@ -1,3 +1,5 @@
+package com.upn.skema_u
+
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
@@ -27,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
@@ -43,6 +46,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlin.math.cos
+import kotlin.math.sin
 
 private val ClientHomeBackground = Color(0xFFF6FBEE)
 private val ClientHomeSurface = Color.White
@@ -552,11 +557,27 @@ private fun VectorIcon(modifier: Modifier, draw: DrawScope.() -> Unit) {
     Canvas(modifier = modifier) { draw() }
 }
 
-@Composable private fun SearchIcon(color: Color, modifier: Modifier) = VectorIcon(modifier) {
-    val stroke = Stroke(1.8.dp.toPx(), cap = StrokeCap.Round)
-    drawCircle(color, radius = size.minDimension * 0.30f, center = Offset(size.width * 0.44f, size.height * 0.42f), style = stroke)
-    drawLine(color, Offset(size.width * 0.64f, size.height * 0.64f), Offset(size.width * 0.82f, size.height * 0.82f), style = stroke)
+@Composable
+private fun SearchIcon(color: Color, modifier: Modifier) = VectorIcon(modifier) {
+    val strokeWidth = 1.8.dp.toPx()
+    val stroke = Stroke(width = strokeWidth, cap = StrokeCap.Round)
+
+    drawCircle(
+        color = color,
+        radius = size.minDimension * 0.30f,
+        center = Offset(size.width * 0.44f, size.height * 0.42f),
+        style = stroke
+    )
+
+    drawLine(
+        color = color,
+        start = Offset(size.width * 0.64f, size.height * 0.64f),
+        end = Offset(size.width * 0.82f, size.height * 0.82f),
+        strokeWidth = strokeWidth,
+        cap = StrokeCap.Round
+    )
 }
+
 
 @Composable private fun StarIcon(color: Color, modifier: Modifier) = VectorIcon(modifier) {
     val p = Path()
@@ -567,8 +588,8 @@ private fun VectorIcon(modifier: Modifier, draw: DrawScope.() -> Unit) {
     repeat(10) { i ->
         val angle = Math.toRadians((i * 36 - 90).toDouble())
         val r = if (i % 2 == 0) outer else inner
-        val x = cx + kotlin.math.cos(angle).toFloat() * r
-        val y = cy + kotlin.math.sin(angle).toFloat() * r
+        val x = cx + cos(angle).toFloat() * r
+        val y = cy + sin(angle).toFloat() * r
         if (i == 0) p.moveTo(x, y) else p.lineTo(x, y)
     }
     p.close()
@@ -615,14 +636,38 @@ private fun VectorIcon(modifier: Modifier, draw: DrawScope.() -> Unit) {
 }
 
 @Composable private fun MessageIcon(color: Color, modifier: Modifier) = VectorIcon(modifier) {
-    drawRoundRect(color, Offset(3.dp.toPx(), 4.dp.toPx()), Size(14.dp.toPx(), 11.dp.toPx()), androidx.compose.ui.geometry.CornerRadius(2.dp.toPx()), style = Stroke(1.5.dp.toPx()))
+    drawRoundRect(color, Offset(3.dp.toPx(), 4.dp.toPx()), Size(14.dp.toPx(), 11.dp.toPx()),
+        CornerRadius(2.dp.toPx()), style = Stroke(1.5.dp.toPx()))
 }
 
-@Composable private fun ClipboardIcon(color: Color, modifier: Modifier) = VectorIcon(modifier) {
-    val stroke = Stroke(1.5.dp.toPx(), cap = StrokeCap.Round, join = StrokeJoin.Round)
-    drawRoundRect(color, Offset(4.dp.toPx(), 4.dp.toPx()), Size(12.dp.toPx(), 14.dp.toPx()), androidx.compose.ui.geometry.CornerRadius(1.5.dp.toPx()), style = stroke)
-    drawLine(color, Offset(7.dp.toPx(), 8.dp.toPx()), Offset(13.dp.toPx(), 8.dp.toPx()), style = stroke)
-    drawLine(color, Offset(7.dp.toPx(), 12.dp.toPx()), Offset(13.dp.toPx(), 12.dp.toPx()), style = stroke)
+@Composable
+private fun ClipboardIcon(color: Color, modifier: Modifier) = VectorIcon(modifier) {
+    val strokeWidth = 1.5.dp.toPx()
+    val stroke = Stroke(width = strokeWidth, cap = StrokeCap.Round, join = StrokeJoin.Round)
+
+    drawRoundRect(
+        color = color,
+        topLeft = Offset(4.dp.toPx(), 4.dp.toPx()),
+        size = Size(12.dp.toPx(), 14.dp.toPx()),
+        cornerRadius = CornerRadius(1.5.dp.toPx()),
+        style = stroke
+    )
+
+    drawLine(
+        color = color,
+        start = Offset(7.dp.toPx(), 8.dp.toPx()),
+        end = Offset(13.dp.toPx(), 8.dp.toPx()),
+        strokeWidth = strokeWidth,
+        cap = StrokeCap.Round
+    )
+
+    drawLine(
+        color = color,
+        start = Offset(7.dp.toPx(), 12.dp.toPx()),
+        end = Offset(13.dp.toPx(), 12.dp.toPx()),
+        strokeWidth = strokeWidth,
+        cap = StrokeCap.Round
+    )
 }
 
 @Composable private fun UserIcon(color: Color, modifier: Modifier) = VectorIcon(modifier) {
